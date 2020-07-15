@@ -1,0 +1,22 @@
+<td>
+  <app-parameter
+    [parameter_values]="parameter_values"
+    (valueEmitter)="onValuesEmitted($event)"
+    (paramEmitter)="onParamEmitted($event)"
+  ></app-parameter>
+</td>
+<button (click)="addConditionValues()">OR</button>
+<td>
+  <div *ngFor="let cv of row.parameter.conditions">
+    <app-condition-value
+      [condition_values]="cv"
+      [values]="values"
+      [conditions]="conditions"
+      (condEmitter)="onConditionEmitted($event)"
+    ></app-condition-value>
+
+    <button (click)="onClickDeleteCondValue(cv)">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
+</td>

@@ -1,0 +1,44 @@
+<mat-form-field appearance="fill" class="input-space">
+  <mat-label>select conditionr</mat-label>
+  <mat-select (selectionChange)="onConditionSelect($event)">
+    <mat-option *ngFor="let c of conditions" [value]="c">
+      {{ c }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field class="example-chip-list input-space">
+  <!--Chip Lists-->
+  <mat-chip-list #chipListVal aria-label="Value selection">
+    <!--TO print chips-->
+    <mat-chip
+      *ngFor="let val of selected_value"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="removeValue(val)"
+    >
+      {{ val }}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+    <!--input-->
+    <input
+      placeholder="New Value..."
+      #valueInput
+      [formControl]="valueCtrl"
+      [matAutocomplete]="autoValue"
+      [matChipInputFor]="chipListVal"
+      [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+      (matChipInputTokenEnd)="addValue($event)"
+    />
+  </mat-chip-list>
+
+  <!--For Auto completing -->
+  <mat-autocomplete
+    #autoValue="matAutocomplete"
+    (optionSelected)="selectedValue($event)"
+  >
+    <!--To list down all the values-->
+    <mat-option *ngFor="let v of filteredValues | async" [value]="v">
+      {{ v }}
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>

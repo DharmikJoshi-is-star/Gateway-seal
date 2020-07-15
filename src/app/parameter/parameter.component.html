@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" class="input-space">
+  <mat-label>select parameter</mat-label>
+
+  <mat-select #parameter (selectionChange)="onParameterSelect($event)">
+    <mat-option *ngFor="let p of parameter_values" [value]="p.name">
+      {{ p.name }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
